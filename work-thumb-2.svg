@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Abstract placeholder artwork">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f6fa4" />
+      <stop offset="1" stop-color="#66b7e8" />
+    </linearGradient>
+    <radialGradient id="fog" cx="25%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#0a2f4a" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#0a2f4a" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="arcGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7fffd1" stop-opacity="0.92" />
+      <stop offset="1" stop-color="#b9ff9b" stop-opacity="0.72" />
+    </linearGradient>
+    <linearGradient id="arcPurple" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#c08bff" stop-opacity="0.85" />
+      <stop offset="1" stop-color="#6d6cff" stop-opacity="0.75" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)" />
+  <rect width="1600" height="1000" fill="url(#fog)" />
+
+  <g fill="none" stroke-linecap="round" opacity="0.9">
+    <path d="M 1520 120 C 1080 60 860 200 740 440 C 630 660 760 860 1040 980" stroke="url(#arcGreen)" stroke-width="150" />
+    <path d="M 1550 150 C 1140 120 940 250 840 440 C 740 620 830 790 1040 930" stroke="url(#arcPurple)" stroke-width="120" />
+    <path d="M 1560 190 C 1210 180 1040 300 960 440 C 880 580 940 710 1080 880" stroke="#0a0a0f" stroke-opacity="0.28" stroke-width="90" />
+  </g>
+</svg>

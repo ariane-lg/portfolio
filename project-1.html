@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" class="project-page">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Tempo Europulse Platform - Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="project.css" />
+  </head>
+  <body class="project-page project-1-page">
+    <header id="site-header"></header>
+
+    <main class="project-main" aria-label="Project details">
+      <section class="project-hero" aria-label="Project hero image">
+        <img src="projects/tempoeuropulse/europulsev2.jpg" alt="" loading="eager" />
+      </section>
+
+      <section class="project-details" aria-label="Project overview">
+        <div class="project-details-grid">
+          <div class="project-intro" aria-label="Project introduction">
+            <div class="project-intro-grid">
+          <div class="project-meta">
+            <h1>Project Tempo Europulse Platform</h1>
+            <h2 class="project-subtitle">Data product development</h2>
+          </div>
+
+          <div class="project-body">
+            <p>
+              EuroPulse is a custom-designed and custom-built analytical platform exploring voter attitudes to the economy, politics and climate across 25 European countries and over 1,000 sub-regions, with advanced modelling extending coverage to more than 12,000 local areas. I led the end-to-end design and development of the platform, translating complex MRP modelling outputs into a usable product and building the application from the ground up – spanning interaction design, front-end development, data integration and deployment.
+            </p>
+          </div>
+
+            </div>
+          </div>
+
+          <figure
+            class="project-full-width-media project-video-full"
+            aria-label="Platform preview video"
+          >
+            <video
+              src="projects/tempoeuropulse/simplepurplescreen.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              disablepictureinpicture
+              disableremoteplayback
+              controlslist="nodownload noplaybackrate noremoteplayback"
+              preload="metadata"
+            ></video>
+          </figure>
+
+          <div class="project-two-column" aria-label="Additional project description">
+            <p>
+              Developed in close collaboration with data scientists and researchers,
+              EuroPulse combines commissioned survey data with official regional
+              statistics to enable geographically detailed insight beyond standard
+              polling. For 14 countries, richer national models provide finer local
+              resolution while maintaining consistency across the Europe-wide dataset.
+              The platform incorporates both national and European benchmarks,
+              supporting comparison across countries, regions and demographic groups
+              to reflect the international nature of the client's work.
+            </p>
+            <p>
+              The client's website was originally developed externally. As part of
+              delivery, I collaborated closely with the web development agency to
+              integrate the dashboard into the existing site. I subsequently took
+              responsibility for the full platform, including hosting and maintenance,
+              bringing ongoing ownership in-house to reduce costs and simplify
+              management. The result is a production-grade analytical product
+              supporting both high-level strategy and local decision-making,
+              representing a step-change in Project Tempo's European analytics
+              capability.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="project-footer-banner" aria-label="Contact links">
+      <div class="project-footer-links">
+        <a
+          class="project-footer-link"
+          href="https://www.linkedin.com/in/ariane-lion-giustiniani/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Open LinkedIn profile"
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M5.37214 24H0.396429V7.97674H5.37214V24ZM2.88161 5.79102C1.29054 5.79102 0 4.47317 0 2.8821C2.37147e-08 1.29063 1.29014 0.000488281 2.88161 0.000488281C4.47307 0.000488281 5.76321 1.29063 5.76321 2.8821C5.76321 4.47317 4.47214 5.79102 2.88161 5.79102ZM23.9946 24H19.0296V16.2C19.0296 14.341 18.9921 11.9571 16.4427 11.9571C13.8557 11.9571 13.4593 13.9767 13.4593 16.066V24H8.48893V7.97674H13.2611V10.1625H13.3307C13.995 8.90352 15.6177 7.57495 18.0386 7.57495C23.0743 7.57495 24 10.891 24 15.1982V24H23.9946Z"
+            />
+          </svg>
+        </a>
+        <a
+          class="project-footer-link project-footer-link-email"
+          href="mailto:ariane.liongiustiniani@gmail.com"
+          aria-label="Send email"
+        >
+          <span class="project-footer-email-at" aria-hidden="true">@</span>
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((html) => {
+          const header = document.getElementById("site-header");
+          if (!header) {
+            return;
+          }
+          header.innerHTML = html;
+
+          const activeLink = header.querySelector('a[href="work.html"]');
+          if (activeLink) {
+            activeLink.classList.add("active");
+          }
+
+          const setHeaderHeight = () => {
+            const height = header.getBoundingClientRect().height;
+            document.documentElement.style.setProperty(
+              "--site-header-height",
+              `${height}px`
+            );
+          };
+
+          setHeaderHeight();
+
+          if ("ResizeObserver" in window) {
+            new ResizeObserver(setHeaderHeight).observe(header);
+          } else {
+            window.addEventListener("resize", setHeaderHeight);
+          }
+        });
+    </script>
+  </body>
+</html>

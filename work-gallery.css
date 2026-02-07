@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600&family=Noto+Sans+Display:wght@300;400;500;600&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html.work-gallery-page {
+  color-scheme: dark;
+}
+
+body.work-gallery-page {
+  margin: 0;
+  min-height: 100%;
+  background: #000;
+  color: #fff0f4;
+  font-family: "Noto Sans Display", Inter, Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+.work-gallery-page .wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Main grid (CodePen layout) */
+
+.work-gallery-page .grid-container {
+  display: grid;
+  grid-gap: 5px;
+  padding: 5px;
+  background: #000;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: repeat(10, 300px);
+  grid-template-areas:
+    "item1"
+    "item2"
+    "item3"
+    "item4"
+    "item5"
+    "item6"
+    "item7"
+    "item8"
+    "item9"
+    "item10";
+}
+
+.work-gallery-page .grid-container .item {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.work-gallery-page .grid-container .item .tile {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}
+
+.work-gallery-page .grid-container .item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Grid - Named areas */
+
+.work-gallery-page .item1 {
+  grid-area: item1;
+}
+.work-gallery-page .item2 {
+  grid-area: item2;
+}
+.work-gallery-page .item3 {
+  grid-area: item3;
+}
+.work-gallery-page .item4 {
+  grid-area: item4;
+}
+.work-gallery-page .item5 {
+  grid-area: item5;
+}
+.work-gallery-page .item6 {
+  grid-area: item6;
+}
+.work-gallery-page .item7 {
+  grid-area: item7;
+}
+.work-gallery-page .item8 {
+  grid-area: item8;
+}
+.work-gallery-page .item9 {
+  grid-area: item9;
+}
+.work-gallery-page .item10 {
+  grid-area: item10;
+}
+
+/* Desktop layout + image effect (CodePen) */
+
+@media only screen and (min-width: 700px) {
+  .work-gallery-page .grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(8, 300px);
+    grid-template-areas:
+      "item1 item2"
+      "item3 item3"
+      "item4 item5"
+      "item6 item5"
+      "item7 item7"
+      "item7 item7"
+      "item8 item9"
+      "item10 item10";
+  }
+
+  .work-gallery-page .grid-container .item img {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    transition: filter 1s;
+    -webkit-transition: filter 1s;
+    -moz-transition: filter 1s;
+  }
+
+  .work-gallery-page .grid-container .item:hover img {
+    filter: none;
+    -webkit-filter: none;
+    -moz-filter: none;
+    -ms-filter: none;
+    -o-filter: none;
+  }
+}
+
+/* Hover information overlay */
+
+.work-gallery-page .tile-overlay {
+  position: absolute;
+  inset: 0;
+  padding: clamp(12px, 2vw, 22px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.work-gallery-page .tile-card {
+  background: rgba(247, 242, 234, 0);
+  height: 100%;
+  padding: clamp(16px, 2.4vw, 40px);
+  color: rgb(37, 37, 37);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.6vw, 14px);
+}
+
+.work-gallery-page .tile-card p,
+.work-gallery-page .tile-card h2 {
+  margin: 0;
+}
+
+.work-gallery-page .tile-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: rgba(37, 37, 37, 0.55);
+}
+
+.work-gallery-page .tile-title {
+  font-family: "Fraunces", Didot, "Bodoni MT", "Noto Serif Display", serif;
+  font-weight: 600;
+  font-size: clamp(1.55rem, 2.5vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.work-gallery-page .tile-text {
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.1vw, 1rem);
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
+.work-gallery-page .tile-arrow {
+  margin-top: auto;
+  width: 38px;
+  height: 38px;
+  display: block;
+  background: transparent;
+  border: 0;
+  font-size: 0;
+  line-height: 1;
+  align-self: flex-end;
+  background-image: url("arrow-forward-simple-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 34px 34px;
+}
+
+.work-gallery-page .tile:hover .tile-overlay,
+.work-gallery-page .tile:focus-visible .tile-overlay,
+.work-gallery-page .tile:active .tile-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-gallery-page .tile:focus-visible {
+  outline: 2px solid rgba(255, 240, 244, 0.7);
+  outline-offset: 3px;
+}

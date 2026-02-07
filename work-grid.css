@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@300;400;500;600&display=swap");
+
+html.work-grid-page {
+  color-scheme: dark;
+  --work-bg: #000;
+  --work-text: #fff0f4;
+  --work-card-bg: rgba(255, 255, 255, 0.04);
+  --work-card-border: rgba(255, 255, 255, 0.14);
+  background: var(--work-bg);
+}
+
+body.work-grid-page {
+  margin: 0;
+  background: var(--work-bg);
+  color: var(--work-text);
+  font-family: "Noto Sans Display", Inter, Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+.work-grid-page #site-header {
+  color: var(--work-text);
+}
+
+.work-grid-page #site-header .logo {
+  color: inherit;
+}
+
+.work-grid-page #site-header nav a {
+  color: inherit;
+}
+
+.work-grid-page #site-header nav a:hover,
+.work-grid-page #site-header nav a.active {
+  color: var(--accent-color);
+}
+
+.work-grid-page main {
+  padding: clamp(56px, 7vw, 88px) max(24px, 5vw, 56px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.work-grid-page .work-hero {
+  margin-bottom: clamp(22px, 5vw, 48px);
+}
+
+.work-grid-page h1 {
+  margin: 0 0 10px;
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.work-grid-page .project-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(16px, 2.6vw, 28px);
+}
+
+.work-grid-page .project-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  border: 1px solid var(--work-card-border);
+  background: var(--work-card-bg);
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  min-height: 100%;
+  transform: translateZ(0);
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.work-grid-page .project-card:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.work-grid-page .project-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.work-grid-page .project-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: hue-rotate(var(--thumb-hue, 0deg)) saturate(1.05);
+}
+
+.work-grid-page .project-grid > li:nth-child(6n + 1) {
+  --thumb-hue: 0deg;
+}
+
+.work-grid-page .project-grid > li:nth-child(6n + 2) {
+  --thumb-hue: 40deg;
+}
+
+.work-grid-page .project-grid > li:nth-child(6n + 3) {
+  --thumb-hue: 90deg;
+}
+
+.work-grid-page .project-grid > li:nth-child(6n + 4) {
+  --thumb-hue: 150deg;
+}
+
+.work-grid-page .project-grid > li:nth-child(6n + 5) {
+  --thumb-hue: 215deg;
+}
+
+.work-grid-page .project-grid > li:nth-child(6n + 6) {
+  --thumb-hue: 275deg;
+}

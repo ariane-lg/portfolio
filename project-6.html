@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" class="project-page">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stonehaven Data Visualisation Strategy - Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="project.css" />
+  </head>
+  <body class="project-page">
+    <header id="site-header"></header>
+
+    <main class="project-main" aria-label="Project details">
+      <section class="project-hero" aria-label="Project hero image">
+        <img src="project-placeholder.svg" alt="" loading="eager" />
+      </section>
+
+      <section class="project-details" aria-label="Project overview">
+        <div class="project-details-grid">
+          <div class="project-meta">
+            <h1>Stonehaven Data Visualisation Strategy</h1>
+            <h2 class="project-subtitle">
+              Data visualisation strategy and capability building
+            </h2>
+          </div>
+
+          <div class="project-body">
+            <p>
+              Placeholder project page. We can add visuals, roles, tools and
+              outcomes here next.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((html) => {
+          const header = document.getElementById("site-header");
+          if (!header) {
+            return;
+          }
+          header.innerHTML = html;
+
+          const activeLink = header.querySelector('a[href="work.html"]');
+          if (activeLink) {
+            activeLink.classList.add("active");
+          }
+
+          const setHeaderHeight = () => {
+            const height = header.getBoundingClientRect().height;
+            document.documentElement.style.setProperty(
+              "--site-header-height",
+              `${height}px`
+            );
+          };
+
+          setHeaderHeight();
+
+          if ("ResizeObserver" in window) {
+            new ResizeObserver(setHeaderHeight).observe(header);
+          } else {
+            window.addEventListener("resize", setHeaderHeight);
+          }
+        });
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" class="work-page">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About - Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="work.css" />
+  </head>
+  <body class="work-page">
+    <header id="site-header"></header>
+
+    <nav class="indicator-nav" aria-label="About sections">
+      <ul class="indicator">
+        <li>
+          <a href="#dataviz"
+            ><span class="sr-only">Data visualisation and storytelling</span></a
+          >
+        </li>
+        <li>
+          <a href="#dashboards"
+            ><span class="sr-only">Dashboard and tool development</span></a
+          >
+        </li>
+        <li>
+          <a href="#hci"
+            ><span class="sr-only">Human–computer interaction design</span></a
+          >
+        </li>
+        <li>
+          <a href="#management"
+            ><span class="sr-only">Project and people management</span></a
+          >
+        </li>
+        <li>
+          <a href="#gis"><span class="sr-only">GIS and mapping</span></a>
+        </li>
+        <li>
+          <a href="#sustainability"
+            ><span class="sr-only">Sustainability and accountability</span></a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <main class="work-main">
+      <section id="dataviz" class="section work-section">
+        <div class="content">
+          <h2>Data visualisation and storytelling</h2>
+          <div class="text">
+            <p>
+              I approach data visualisation as a way of structuring and
+              communicating complex information, drawing on experience across
+              data-driven stories, dashboards, editorial visuals and custom-coded
+              work. This includes developing standards, guidance and training
+              that shape how visualisation is used and understood across
+              organisations, supporting meaningful use through which value is
+              created.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboards" class="section work-section">
+        <div class="content">
+          <h2>Dashboard and tool development</h2>
+          <div class="text">
+            <p>
+              At the core of dashboard and tool development is the design of
+              systems that structure and support the effective use of
+              information over time. I design and build data products using a
+              wide range of tools, from business intelligence platforms to fully
+              custom-coded tools.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="hci" class="section work-section">
+        <div class="content">
+          <h2>Human–computer interaction design</h2>
+          <div class="text">
+            <p>
+              Human–computer interaction underpins my work. Whether a dashboard,
+              an infographic or a custom tool, my focus is on how people
+              encounter, interpret and act on information. This means designing
+              interfaces that are intuitive without being simplistic, and that
+              support exploration, comparison and decision-making. UX and UI
+              design are not separate stages in my process, but integral to
+              ensuring analytical work is usable in practice.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="management" class="section work-section">
+        <div class="content">
+          <h2>Project and people management</h2>
+          <div class="text">
+            <p>
+              I lead and coordinate data visualisation work across
+              multidisciplinary teams, managing projects from definition through
+              delivery. This includes working closely with data scientists and
+              analysts to shape analytical outputs into usable data products, as
+              well as managing a small design function comprising in-house
+              resource and external freelancers.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="gis" class="section work-section">
+        <div class="content">
+          <h2>GIS and mapping</h2>
+          <div class="text">
+            <p>
+              Geography is a key dimension of the analytical work I do,
+              providing a consistent thread across disciplines and areas of
+              analysis. I build custom maps and use geographic data to surface
+              patterns, relevant context and trade-offs across regions. My
+              experience is also shaped by my background as a place-policy
+              analyst, where spatial evidence was needed to support funding
+              decisions, infrastructure planning and long-term strategy under
+              public scrutiny.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sustainability" class="section work-section">
+        <div class="content">
+          <h2>Sustainability and accountability</h2>
+          <div class="text">
+            <p>
+              My experience in sustainability has shaped how I understand the
+              risks, trade-offs and opportunities organisations face today
+              across environmental, economic and regulatory contexts. It has
+              also influenced my approach to analytical work more broadly,
+              particularly where evidence is used to support strategic
+              decisions, external accountability or public-facing communication.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <canvas id="cursor-canvas" class="cursor-canvas" aria-hidden="true"></canvas>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((html) => {
+          const header = document.getElementById("site-header");
+          if (!header) {
+            return;
+          }
+          header.innerHTML = html;
+
+          const path = window.location.pathname.split("/").pop() || "index.html";
+          const activeLink = header.querySelector(`a[href="${path}"]`);
+          if (activeLink) {
+            activeLink.classList.add("active");
+          }
+
+          const indicatorLinks = Array.from(
+            document.querySelectorAll('.indicator-nav a[href^="#"]')
+          );
+          const indicatorSections = indicatorLinks
+            .map((link) => document.querySelector(link.getAttribute("href")))
+            .filter(Boolean);
+
+          const setCurrentIndicator = (sectionId) => {
+            indicatorLinks.forEach((link) => {
+              const isCurrent = link.getAttribute("href") === `#${sectionId}`;
+              if (isCurrent) {
+                link.setAttribute("aria-current", "true");
+              } else {
+                link.removeAttribute("aria-current");
+              }
+            });
+          };
+
+          const getActiveSectionId = () => {
+            if (indicatorSections.length === 0) {
+              return null;
+            }
+
+            const offset = header.getBoundingClientRect().height + 24;
+            let activeSection = indicatorSections[0];
+
+            for (const section of indicatorSections) {
+              const sectionTop = section.getBoundingClientRect().top - offset;
+              if (sectionTop <= 0) {
+                activeSection = section;
+              } else {
+                break;
+              }
+            }
+
+            return activeSection.id;
+          };
+
+          let rafId = 0;
+          const scheduleIndicatorUpdate = () => {
+            if (rafId) {
+              return;
+            }
+            rafId = window.requestAnimationFrame(() => {
+              rafId = 0;
+              const activeId = getActiveSectionId();
+              if (activeId) {
+                setCurrentIndicator(activeId);
+              }
+            });
+          };
+
+          const setHeaderHeight = () => {
+            const height = header.getBoundingClientRect().height;
+            document.documentElement.style.setProperty(
+              "--site-header-height",
+              `${height}px`
+            );
+          };
+
+          setHeaderHeight();
+          scheduleIndicatorUpdate();
+
+          if ("ResizeObserver" in window) {
+            new ResizeObserver(() => {
+              setHeaderHeight();
+              scheduleIndicatorUpdate();
+            }).observe(header);
+          } else {
+            window.addEventListener("resize", () => {
+              setHeaderHeight();
+              scheduleIndicatorUpdate();
+            });
+          }
+
+          window.addEventListener("scroll", scheduleIndicatorUpdate, {
+            passive: true,
+          });
+
+          indicatorLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              const href = link.getAttribute("href");
+              const targetId = href && href.startsWith("#") ? href.slice(1) : "";
+              if (targetId) {
+                setCurrentIndicator(targetId);
+              }
+            });
+          });
+        });
+    </script>
+    <script src="work-cursor.js"></script>
+  </body>
+</html>

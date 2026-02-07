@@ -1,0 +1,255 @@
+.project-carousel-block {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  overflow: visible;
+}
+
+
+.project-carousel-block .carousel {
+  --carousel-transition-duration: 250ms;
+  --carousel-transition-ease: ease-out;
+  --carousel-bg-color-rgb: 0, 0, 0;
+  --carousel-shadow-color-rgb: 128, 128, 128;
+  --carousel-item-height: clamp(9rem, 22vw, 20rem);
+  --carousel-item-aspect: 0.8;
+  --carousel-item-width: calc(var(--carousel-item-height) * var(--carousel-item-aspect));
+  --carousel-item-hover-effect: 1.075;
+  --carousel-item-reflection-blur: 0.25rem;
+  --carousel-item-empty-color-rgb: 255, 255, 255;
+  --carousel-item-glow-color-rgb: 255, 255, 255;
+  --carousel-item-glow-size: 5rem;
+  --carousel-diameter: min(56rem, calc(100vw - 48px));
+  --carousel-3d-perspective: 1000px;
+  --carousel-3d-perspective-origin: 50% 20%;
+  --carousel-control-button-width: 1.25rem;
+  --carousel-control-button-height: 4rem;
+  --carousel-control-color-rgb: 255, 255, 255;
+  --carousel-animation-duration: 25s;
+
+  --_diameter: var(--carousel-diameter);
+  --_radius: calc(var(--_diameter) / 2);
+  --_item-width: var(--carousel-item-width);
+  --_item-height: var(--carousel-item-height);
+
+  position: relative;
+  perspective: var(--carousel-3d-perspective);
+  perspective-origin: var(--carousel-3d-perspective-origin);
+  transform-style: preserve-3d;
+  width: min(var(--_diameter), 100%);
+  height: var(--_diameter);
+}
+
+.project-carousel-block .carousel .carousel-control-button {
+  --_width: var(--carousel-control-button-width);
+  --_height: var(--carousel-control-button-height);
+
+  z-index: 10;
+  width: var(--_width);
+  height: var(--_height);
+  background-color: rgb(var(--carousel-control-color-rgb));
+  opacity: 0.2;
+  transition: opacity var(--carousel-transition-duration)
+    var(--carousel-transition-ease);
+  position: absolute;
+}
+
+.project-carousel-block .carousel .carousel-control-button:hover {
+  opacity: 0.4;
+}
+
+.project-carousel-block .carousel .carousel-control-button.is-active {
+  opacity: 0.8;
+}
+
+.project-carousel-block .carousel .carousel-control-button input {
+  appearance: none;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.project-carousel-block .carousel .carousel-control-button.left {
+  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  top: calc(var(--_radius) - var(--_height) / 2);
+  left: 0;
+}
+
+.project-carousel-block .carousel .carousel-control-button.right {
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  top: calc(var(--_radius) - var(--_height) / 2);
+  right: 0;
+}
+
+.project-carousel-block .carousel .carousel-rotation-direction {
+  --_z: calc(var(--_radius) * -1);
+  transform: translateZ(var(--_z));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.project-carousel-block .carousel .carousel-item-wrapper {
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  animation: project3-carousel-rotation var(--carousel-animation-duration)
+    linear infinite;
+  will-change: transform;
+}
+
+.project-carousel-block .carousel.is-reverse .carousel-item-wrapper {
+  animation-direction: reverse;
+}
+
+.project-carousel-block .carousel.is-paused .carousel-item-wrapper {
+  animation-play-state: paused;
+}
+
+@keyframes project3-carousel-rotation {
+  from {
+    transform: translateZ(0) rotateY(0turn);
+  }
+  to {
+    transform: translateZ(0) rotateY(1turn);
+  }
+}
+
+.project-carousel-block .carousel .carousel-item {
+  --_width: var(--_item-width);
+  --_height: var(--_item-height);
+  --_rotation: calc(360 / var(--_num-elements) * var(--_index) * 1deg);
+
+  left: calc(var(--_radius) - var(--_item-width) / 2);
+  top: calc(var(--_radius) - var(--_item-height) / 2);
+  transform: rotateY(var(--_rotation)) translateZ(var(--_radius));
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  width: var(--_width);
+  height: var(--_height);
+  transition: transform var(--carousel-transition-duration)
+      var(--carousel-transition-ease),
+    box-shadow var(--carousel-transition-duration)
+      var(--carousel-transition-ease);
+  box-shadow: 0 0 var(--carousel-item-glow-size) transparent;
+  position: absolute;
+  will-change: transform;
+}
+
+.project-carousel-block .carousel .carousel-item:hover {
+  box-shadow: 0 0 var(--carousel-item-glow-size)
+    rgb(var(--carousel-item-glow-color-rgb));
+  transform: rotateY(var(--_rotation))
+    translateZ(calc(var(--_radius) * var(--carousel-item-hover-effect)));
+}
+
+.project-carousel-block .carousel .carousel-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999px;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  background: none;
+  position: relative;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: filter var(--carousel-transition-duration)
+    var(--carousel-transition-ease);
+  filter: none;
+  transform: translateZ(0);
+}
+
+.project-carousel-block .carousel .carousel-item:hover a {
+  filter: none;
+}
+
+.project-carousel-block .carousel .carousel-item a::before,
+.project-carousel-block .carousel .carousel-item a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--carousel-item-empty-color-rgb), 0.05);
+  background-image: var(--_image-url);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0.1px);
+}
+
+.project-carousel-block .carousel .carousel-item a::after {
+  transform: rotateY(180deg) translateZ(0.1px);
+}
+
+.project-carousel-block .carousel .carousel-item::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(var(--carousel-item-empty-color-rgb), 0.05);
+  background-image: linear-gradient(
+      to top,
+      rgba(var(--carousel-bg-color-rgb), 0.25) 0%,
+      rgba(var(--carousel-bg-color-rgb), 1) 75%
+    ),
+    var(--_image-url);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  filter: blur(var(--carousel-item-reflection-blur));
+  transition: filter var(--carousel-transition-duration)
+    var(--carousel-transition-ease);
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  transform-origin: center bottom;
+  transform: rotateX(90deg) rotateZ(180deg) rotateY(180deg);
+  position: absolute;
+}
+
+.project-carousel-block .carousel .carousel-item:hover::before {
+  filter: blur(var(--carousel-item-reflection-blur));
+}
+
+.project-carousel-block .carousel .carousel-ground {
+  --_width: var(--_diameter);
+  --_height: var(--_diameter);
+  --_rotation: 90deg;
+
+  left: calc(var(--_radius) - var(--_width) / 2);
+  top: calc(var(--_radius) - var(--_height) / 2);
+  transform: rotateX(var(--_rotation)) translateZ(calc(var(--_item-height) / -2));
+  width: var(--_width);
+  height: var(--_height);
+  border-radius: 50%;
+  background: radial-gradient(
+    rgba(var(--carousel-shadow-color-rgb), 0.75) 15%,
+    rgba(var(--carousel-bg-color-rgb), 0) 60%
+  );
+  opacity: 0.5;
+  transition: opacity var(--carousel-transition-duration)
+    var(--carousel-transition-ease);
+  position: absolute;
+  pointer-events: none;
+}
+
+.project-carousel-block .carousel.is-paused .carousel-ground {
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-carousel-block .carousel .carousel-item-wrapper {
+    animation: none;
+  }
+
+  .project-carousel-block .carousel .carousel-control-button {
+    display: none;
+  }
+}
