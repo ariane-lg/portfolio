@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600&family=Noto+Sans+Display:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
 
 html.work-page {
   --site-header-height: 96px;
-  --work-bg: #000;
+  --work-bg: var(--site-bg);
   --work-text: #fff0f4;
   --work-muted: rgba(240, 241, 255, 0.82);
   --dataviz-accent: #fcd150;
-  --dashboards-accent: #0229aa;
+  --dashboards-accent: #3359d6;
   --hci-accent: #7fe7ff;
   --management-accent: #a195e7;
   --gis-accent: #9af7bf;
@@ -14,6 +14,7 @@ html.work-page {
   --work-max-width: 1100px;
   --work-gutter: clamp(24px, 5vw, 72px);
   --section-pad-block: clamp(64px, 10vh, 140px);
+  color-scheme: dark;
   background: var(--work-bg);
   scroll-behavior: smooth;
 }
@@ -22,7 +23,7 @@ body.work-page {
   margin: 0;
   background: var(--work-bg);
   color: var(--work-text);
-  font-family: "Noto Sans Display", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 .work-page .cursor-canvas {
@@ -40,7 +41,7 @@ body.work-page {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.82);
+  background: var(--bar-bg);
   backdrop-filter: blur(10px);
   color: var(--work-text);
 }
@@ -87,15 +88,15 @@ body.work-page {
 
 @media (min-width: 64rem) {
   .work-page .content {
-    grid-template-columns: minmax(360px, 1.25fr) minmax(320px, 1fr);
+    grid-template-columns: minmax(420px, 1.35fr) minmax(320px, 1fr);
   }
 }
 
 .work-page .content h2 {
   margin: 0;
-  font-family: "Fraunces", Didot, "Bodoni MT", "Noto Serif Display", serif;
-  font-weight: 300;
-  font-size: clamp(52px, 6vw, 132px);
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(44px, 5.2vw, 110px);
   line-height: 0.9;
   letter-spacing: -0.01em;
   color: var(--section-accent);
@@ -123,6 +124,57 @@ body.work-page {
   right: max(16px, calc(var(--work-gutter) / 2));
   transform: translateY(-50%);
   z-index: 900;
+}
+
+.work-page .intro-links {
+  margin: calc(var(--site-header-height) + 40px) auto 0;
+  padding: 0 var(--work-gutter);
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.7;
+  color: var(--work-muted);
+  max-width: 80ch;
+  text-align: center;
+  font-weight: 400;
+}
+
+.work-page .intro-link {
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 200ms ease;
+}
+
+.work-page .intro-link:hover,
+.work-page .intro-link:focus-visible {
+  opacity: 0.85;
+}
+
+.work-page .intro-link--dataviz {
+  color: var(--dataviz-accent);
+}
+
+.work-page .intro-link--dashboards {
+  color: var(--dashboards-accent);
+}
+
+.work-page .intro-link--hci {
+  color: var(--hci-accent);
+}
+
+.work-page .intro-link--management {
+  color: var(--management-accent);
+}
+
+.work-page .intro-link--gis {
+  color: var(--gis-accent);
+}
+
+.work-page .intro-link--sustainability {
+  color: var(--sustainability-accent);
+}
+
+.work-page .intro-links span.intro-link-label {
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
 }
 
 .work-page .indicator {
@@ -229,6 +281,65 @@ body.work-page {
 
 .work-page .indicator a[href="#sustainability"] {
   --indicator-color: var(--sustainability-accent);
+}
+
+.work-page .project-footer-banner {
+  background: var(--bar-bg);
+  color: var(--accent-color);
+  padding: 16px 24px;
+}
+
+.work-page .project-footer-links {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.work-page .project-footer-link {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.work-page .project-footer-email {
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  font-size: var(--footer-email-size, 30px);
+  font-family: "Ubuntu", "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+}
+
+.work-page .project-footer-link:hover,
+.work-page .project-footer-link:focus-visible,
+.work-page .project-footer-email:hover,
+.work-page .project-footer-email:focus-visible {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+.work-page .project-footer-link svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.work-page .project-footer-email svg {
+  width: 25px;
+  height: 25px;
+  display: block;
 }
 
 @media (max-width: 720px) {

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600&family=Noto+Sans+Display:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -11,10 +11,15 @@ html.work-gallery-page {
 body.work-gallery-page {
   margin: 0;
   min-height: 100%;
-  background: #000;
+  background: var(--site-bg);
   color: #fff0f4;
-  font-family: "Noto Sans Display", Inter, Roboto, "Helvetica Neue", Arial,
-    sans-serif;
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  --dataviz-accent: #fcd150;
+  --dashboards-accent: #0229aa;
+  --hci-accent: #7fe7ff;
+  --management-accent: #a195e7;
+  --gis-accent: #9af7bf;
+  --sustainability-accent: #faa5aa;
 }
 
 .work-gallery-page .wrapper {
@@ -28,7 +33,7 @@ body.work-gallery-page {
   display: grid;
   grid-gap: 5px;
   padding: 5px;
-  background: #000;
+  background: var(--site-bg);
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: repeat(10, 300px);
   grid-template-areas:
@@ -44,11 +49,28 @@ body.work-gallery-page {
     "item10";
 }
 
+.work-gallery-page .grid-container .item.is-hidden {
+  display: none;
+}
+
+/* Compact mode: hide placeholders (items 7-10) without leaving grid gaps. */
+.work-gallery-page .grid-container.is-compact {
+  grid-template-rows: repeat(6, 300px);
+  grid-template-areas:
+    "item1"
+    "item2"
+    "item3"
+    "item4"
+    "item5"
+    "item6";
+}
+
 .work-gallery-page .grid-container .item {
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: var(--site-bg);
 }
+
 
 .work-gallery-page .grid-container .item .tile {
   display: block;
@@ -59,13 +81,20 @@ body.work-gallery-page {
   text-decoration: none;
 }
 
-.work-gallery-page .grid-container .item img {
+.work-gallery-page .grid-container .item img:not(.project-logo) {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  z-index: 0;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
+}
+
+.work-gallery-page .item5 img {
+  object-position: 27% center;
 }
 
 /* Grid - Named areas */
@@ -118,23 +147,35 @@ body.work-gallery-page {
       "item10 item10";
   }
 
-  .work-gallery-page .grid-container .item img {
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
-    transition: filter 1s;
-    -webkit-transition: filter 1s;
-    -moz-transition: filter 1s;
+  .work-gallery-page .grid-container.is-compact {
+    grid-template-rows: repeat(4, 300px);
+    grid-template-areas:
+      "item1 item2"
+      "item3 item3"
+      "item4 item5"
+      "item6 item5";
   }
 
-  .work-gallery-page .grid-container .item:hover img {
-    filter: none;
-    -webkit-filter: none;
-    -moz-filter: none;
-    -ms-filter: none;
-    -o-filter: none;
+}
+
+@media (max-width: 720px) {
+  .work-gallery-page .tile-card {
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .work-gallery-page .tile-kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.08rem;
+  }
+
+  .work-gallery-page .tile-title {
+    font-size: clamp(1.25rem, 7vw, 1.9rem);
+    line-height: 1.15;
+  }
+
+  .work-gallery-page .tile-text {
+    font-size: 0.9rem;
   }
 }
 
@@ -148,14 +189,15 @@ body.work-gallery-page {
   transform: translateY(10px);
   transition: opacity 220ms ease, transform 220ms ease;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .work-gallery-page .tile-card {
-  background: rgba(247, 242, 234, 0);
+  background: transparent;
   height: 100%;
   padding: clamp(16px, 2.4vw, 40px);
-  color: rgb(37, 37, 37);
+  color: #fff;
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
   display: flex;
   flex-direction: column;
   gap: clamp(10px, 1.6vw, 14px);
@@ -171,12 +213,12 @@ body.work-gallery-page {
   letter-spacing: 0.1rem;
   font-weight: 500;
   font-size: 0.85rem;
-  color: rgba(37, 37, 37, 0.55);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .work-gallery-page .tile-title {
-  font-family: "Fraunces", Didot, "Bodoni MT", "Noto Serif Display", serif;
-  font-weight: 600;
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   font-size: clamp(1.55rem, 2.5vw, 3rem);
   line-height: 1.12;
   letter-spacing: -0.02em;
@@ -212,7 +254,86 @@ body.work-gallery-page {
   transform: translateY(0);
 }
 
+.work-gallery-page .tile:hover img:not(.project-logo),
+.work-gallery-page .tile:focus-visible img:not(.project-logo),
+.work-gallery-page .tile:active img:not(.project-logo) {
+  opacity: 0.35;
+}
+
+.work-gallery-page .item5 .project-logo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: clamp(36px, 3vw, 52px);
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 1;
+  transition: none;
+  filter: brightness(0) invert(1);
+}
+
+
 .work-gallery-page .tile:focus-visible {
   outline: 2px solid rgba(255, 240, 244, 0.7);
   outline-offset: 3px;
+}
+
+.work-gallery-page .project-footer-banner {
+  background: var(--bar-bg);
+  color: var(--accent-color);
+  padding: 16px 24px;
+}
+
+.work-gallery-page .project-footer-links {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.work-gallery-page .project-footer-link {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.work-gallery-page .project-footer-email {
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  font-size: var(--footer-email-size, 30px);
+  font-family: "Ubuntu", "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+}
+
+.work-gallery-page .project-footer-email svg {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+
+.work-gallery-page .project-footer-link:hover,
+.work-gallery-page .project-footer-link:focus-visible,
+.work-gallery-page .project-footer-email:hover,
+.work-gallery-page .project-footer-email:focus-visible {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+.work-gallery-page .project-footer-link svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }

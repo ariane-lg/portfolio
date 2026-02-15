@@ -1,0 +1,284 @@
+html.project-6-page {
+  --article-height: 80svh;
+  --column: min(85vw, 20rem);
+  --gutter: 1rlh;
+  --margin: 2rem;
+
+  --p-indent: 5rem;
+  --p-margin: 0;
+
+  --headings: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  --text: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --bg: var(--site-bg);
+  --text-color: #fff;
+  --hgroup-bg: var(--accent-color, #ff4b4b);
+  --hgroup-fg: #0b0b21;
+
+  font-family: var(--text);
+  font-size: 112.5%;
+  background: var(--bg);
+  color: var(--text-color);
+}
+
+@media (min-width: 45em) {
+  html.project-6-page {
+    --article-height: 60svh;
+  }
+}
+
+html.project-6-page,
+body.project-6-page {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  line-height: 1.35;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  background: var(--bg);
+  color: var(--text-color);
+}
+
+body.project-6-page {
+  overflow-x: auto;
+  font-family: var(--text);
+}
+
+.project-6-page .lede-img,
+.project-6-page hgroup,
+.project-6-page p,
+.project-6-page figure {
+  scroll-snap-align: center;
+}
+
+.project-6-page ::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.project-6-page p {
+  margin-block: var(--p-margin);
+}
+
+.project-6-page p + p {
+  text-indent: var(--p-indent);
+}
+
+.project-6-page main {
+  display: grid;
+  height: calc(100% - var(--site-header-height, 0px));
+  margin-top: var(--site-header-height, 0px);
+  padding: 0;
+  grid-template-columns: auto var(--article-height) var(--margin);
+  grid-template-rows: 60vmin 60vmin auto;
+  writing-mode: vertical-lr;
+}
+
+.project-6-page main > * {
+  writing-mode: horizontal-tb;
+}
+
+.project-6-page h1,
+.project-6-page h2,
+.project-6-page h3,
+.project-6-page h4,
+.project-6-page h5,
+.project-6-page h6 {
+  font-family: var(--headings);
+}
+
+.project-6-page .lede-img {
+  display: block;
+  width: 100%;
+  height: calc(100vh - var(--margin) - var(--site-header-height, 0px));
+  grid-row-start: 1;
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  object-fit: cover;
+}
+
+.project-6-page hgroup {
+  line-height: 1;
+  font-size: 4vmin;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  background: var(--hgroup-bg);
+  color: var(--hgroup-fg);
+  outline: calc(var(--gutter) * 2) solid var(--hgroup-bg);
+  height: min-content;
+  align-self: center;
+  justify-self: center;
+  padding: clamp(10px, 1.1vw, 16px) clamp(14px, 1.6vw, 20px);
+  max-inline-size: clamp(280px, 28vw, 420px);
+  box-sizing: border-box;
+}
+
+.project-6-page hgroup h1 {
+  font-size: max(6.2vmin, 1.5rem);
+  margin: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-stretch: 62%;
+  text-wrap: balance;
+}
+
+.project-6-page hgroup h2 {
+  font-size: max(2.6vmin, 0.95rem);
+  font-stretch: 85%;
+  font-weight: 500;
+  margin-block: 0.25em 0.05em;
+  text-wrap: balance;
+}
+
+.project-6-page article {
+  grid-column-start: 2;
+  column-width: var(--column);
+  column-gap: var(--gutter);
+  margin-inline-start: calc(var(--gutter) * -0.2);
+  margin-inline-end: var(--gutter);
+  block-size: var(--article-height);
+  column-fill: auto;
+  text-wrap: pretty;
+  isolation: isolate;
+}
+
+.project-6-page article p {
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  widows: 3;
+  orphans: 3;
+  color: rgba(255, 240, 244, 0.9);
+}
+
+.project-6-page article h2 {
+  font-family: var(--headings);
+  font-weight: 600;
+  font-size: 0.9lh;
+  line-height: 1lh;
+  margin-block: 1lh;
+  break-after: avoid-column;
+}
+
+.project-6-page figure {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: var(--article-height);
+  overflow: hidden;
+  break-before: column;
+  break-inside: avoid;
+  break-after: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-6-page figure img {
+  display: block;
+  width: 100%;
+  height: 0;
+  object-fit: cover;
+  object-position: center;
+  flex: 1;
+}
+
+.project-6-page figcaption {
+  font-family: var(--headings);
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-block: 0.5em;
+}
+
+@media (min-width: 45em) {
+  .project-6-page figure {
+    background: transparent;
+    outline: calc(var(--gutter) * 2) solid rgb(28, 20, 32, 0.1);
+  }
+}
+
+@supports (break-after: column) {
+  @media (min-width: 56em) {
+    .project-6-page figure.double,
+    .project-6-page figure.triple {
+      width: calc(200% + var(--gutter));
+    }
+    .project-6-page figure.double + *::before,
+    .project-6-page figure.triple + *::before {
+      content: '';
+      display: block;
+      break-after: column;
+    }
+  }
+
+  @media (min-width: 92em) {
+    .project-6-page figure.triple {
+      width: calc(300% + (var(--gutter) * 2));
+      margin-inline-start: calc(-100% - var(--gutter));
+    }
+    .project-6-page *:has( + figure.triple)::after {
+      content: '';
+      display: block;
+      break-before: column;
+    }
+  }
+}
+
+.project-6-page figure.tall {
+  height: calc(100svh - var(--site-header-height, 0px) - (var(--margin) * 2));
+  transform: translatey(
+    calc(
+      (-100svh + var(--site-header-height, 0px)) + var(--article-height) +
+        (var(--margin) * 2)
+    )
+  );
+}
+
+.project-6-page figure.full {
+  height: calc(100svh - var(--site-header-height, 0px));
+  transform: translatey(
+    calc(
+      (-100svh + var(--site-header-height, 0px)) + var(--article-height) +
+        (var(--margin))
+    )
+  );
+}
+
+.project-6-page article :first-child,
+html.project-6-page figure + * {
+  margin-block-start: 0;
+}
+
+.project-6-page .footer {
+  opacity: 0.67;
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: var(--gutter);
+  block-size: calc(var(--margin) - 0.5rem);
+  font-family: var(--headings);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.67rem;
+  font-stretch: 70%;
+  border-block-start: 1px solid;
+  padding-block-start: 0.25em;
+  box-sizing: border-box;
+  background: var(--bg);
+  z-index: 5;
+}
+
+.project-6-page #site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  background: var(--bar-bg, var(--site-bg));
+}
+
+.project-6-page ::selection {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}

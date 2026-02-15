@@ -1,14 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap");
+
 :root {
   color-scheme: light;
   --accent-color: rgb(255, 75, 75);
+  --site-bg: #1c1420;
+  --bar-bg: #1c1420;
+  --footer-email-size: 30px;
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  font-family: "Noto Sans Display", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: #fff;
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  background: var(--site-bg);
   color: #fff;
 }
 header {
@@ -16,6 +22,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 32px 48px;
+  background: var(--bar-bg);
 }
 .header-left,
 .header-right {
@@ -28,10 +35,10 @@ header {
   justify-content: flex-end;
 }
 .logo {
-  font-size: 20px;
+  font-size: 21px;
   letter-spacing: 0.05em;
-  font-family: "Noto Sans Display", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 500;
+  font-family: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   color: rgb(255, 255, 255);
 }
 nav a {
@@ -40,6 +47,7 @@ nav a {
   font-size: 14px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  font-weight: 400;
 }
 nav a.active {
   color: var(--accent-color);
@@ -47,6 +55,87 @@ nav a.active {
 nav a:hover {
   color: var(--accent-color);
 }
+.header-contact {
+  position: relative;
+}
+
+.header-contact summary {
+  list-style: none;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.header-contact summary:hover {
+  color: var(--accent-color);
+}
+
+.header-contact summary::-webkit-details-marker {
+  display: none;
+}
+
+.header-contact[open] summary {
+  color: var(--accent-color);
+}
+
+.header-contact-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 64px;
+  background: var(--bar-bg);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 6px;
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.header-contact[open] .header-contact-menu {
+  display: flex;
+}
+
+.header-contact-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.header-contact-menu a + a {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.header-contact-menu svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.header-contact-menu .contact-email svg {
+  width: 19px;
+  height: 19px;
+}
+
+.header-contact-menu a:hover,
+.header-contact-menu a:focus-visible {
+  color: var(--accent-color);
+}
+
 main {
   padding: 80px 48px;
 }
