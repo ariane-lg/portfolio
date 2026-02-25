@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Work - Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="work-gallery.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./work-gallery.css" />
   </head>
   <body class="work-gallery-page">
     <header id="site-header"></header>
@@ -14,8 +14,8 @@
       <div class="wrapper">
         <div class="grid-container is-compact" role="list">
         <div class="item item2" role="listitem">
-          <a class="tile" href="project-1.html" aria-label="Project One">
-          <img src="projects/tempoeuropulse/Europulse.jpg" alt="" loading="lazy" />
+          <a class="tile" href="tempo-europulse-platform/" aria-label="Project One">
+          <img src="../projects/tempoeuropulse/Europulse.jpg" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Data product development</p>
@@ -29,8 +29,8 @@
         </div>
 
         <div class="item item1" role="listitem">
-          <a class="tile" href="project-2.html" aria-label="Project Two">
-          <img src="projects/tempoitaly/tempoitalyv2.jpg" alt="" loading="lazy" />
+          <a class="tile" href="tempo-regional-policy-dashboards/" aria-label="Project Two">
+          <img src="../projects/tempoitaly/tempoitalyv2.jpg" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Data tools and regional insights</p>
@@ -44,8 +44,8 @@
         </div>
 
         <div class="item item3" role="listitem">
-          <a class="tile" href="project-3.html" aria-label="Project Three">
-          <img src="projects/tempoeuropulse/hero.png" alt="" loading="lazy" />
+          <a class="tile" href="tempo-visual-storytelling-communications/" aria-label="Project Three">
+          <img src="../projects/tempoeuropulse/hero.png" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Data visualisation and storytelling</p>
@@ -59,8 +59,8 @@
         </div>
 
         <div class="item item4" role="listitem">
-          <a class="tile" href="project-4.html" aria-label="Project Four">
-          <img src="projects/labourinsights/Labour.png" alt="" loading="lazy" />
+          <a class="tile" href="labour-insights-project/" aria-label="Project Four">
+          <img src="../projects/labourinsights/Labour.png" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Policy and insights</p>
@@ -74,11 +74,11 @@
         </div>
 
         <div class="item item5" role="listitem">
-          <a class="tile" href="project-5.html" aria-label="Project Five">
-          <img src="projects/electriclondon/iStock-1331593726.webp" alt="" loading="lazy" />
+          <a class="tile" href="electric-london/" aria-label="Project Five">
+          <img src="../projects/electriclondon/iStock-1331593726.webp" alt="" loading="lazy" />
           <img
             class="project-logo"
-            src="projects/electriclondon/stonehaven_logo.svg"
+            src="../projects/electriclondon/stonehaven_logo.svg"
             alt=""
             aria-hidden="true"
           />
@@ -95,8 +95,8 @@
         </div>
 
         <div class="item item6" role="listitem">
-          <a class="tile" href="project-6.html" aria-label="Project Six">
-          <img src="projects/datavisstrategy/hero1.png" alt="" loading="lazy" />
+          <a class="tile" href="stonehaven-data-visualisation-strategy/" aria-label="Project Six">
+          <img src="../projects/datavisstrategy/hero1.png" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Data visualisation strategy and capability building</p>
@@ -111,7 +111,7 @@
 
         <div class="item item7 is-hidden" role="listitem">
           <a class="tile" href="#" aria-label="Project Seven">
-            <img src="work-thumb-2.svg" alt="" loading="lazy" />
+            <img src="./work-thumb-2.svg" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Design system</p>
@@ -127,7 +127,7 @@
 
         <div class="item item8 is-hidden" role="listitem">
           <a class="tile" href="#" aria-label="Project Eight">
-            <img src="work-thumb-3.svg" alt="" loading="lazy" />
+            <img src="./work-thumb-3.svg" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Prototype</p>
@@ -143,7 +143,7 @@
 
         <div class="item item9 is-hidden" role="listitem">
           <a class="tile" href="#" aria-label="Project Nine">
-            <img src="work-thumb-1.svg" alt="" loading="lazy" />
+            <img src="./work-thumb-1.svg" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Storytelling</p>
@@ -160,7 +160,7 @@
 
         <div class="item item10 is-hidden" role="listitem">
           <a class="tile" href="#" aria-label="Project Ten">
-            <img src="work-thumb-4.svg" alt="" loading="lazy" />
+            <img src="./work-thumb-4.svg" alt="" loading="lazy" />
             <div class="tile-overlay" aria-hidden="true">
               <div class="tile-card">
                 <p class="tile-kicker">Tooling</p>
@@ -218,7 +218,7 @@
     </footer>
 
     <script>
-      fetch("header.html")
+      fetch("../header.html")
         .then((response) => response.text())
         .then((html) => {
           const header = document.getElementById("site-header");
@@ -227,14 +227,51 @@
           }
           header.innerHTML = html;
 
-          const path = window.location.pathname.split("/").pop() || "index.html";
-          const activeLink = header.querySelector(`a[href="${path}"]`);
-          if (activeLink) {
-            activeLink.classList.add("active");
+          const pathSegments = window.location.pathname.split("/").filter(Boolean);
+          const portfolioIndex = pathSegments.indexOf("portfolio");
+          const routeSegments =
+            portfolioIndex >= 0
+              ? pathSegments.slice(portfolioIndex + 1)
+              : pathSegments.slice();
+
+          if (
+            routeSegments.length > 0 &&
+            routeSegments[routeSegments.length - 1].includes(".")
+          ) {
+            routeSegments.pop();
           }
+
+          const depth = routeSegments.length;
+          const prefix = depth === 0 ? "./" : "../".repeat(depth);
+          const routeMap = {
+            home: `${prefix}`,
+            work: `${prefix}work/`,
+            about: `${prefix}about/`,
+          };
+
+          header.querySelectorAll("[data-route]").forEach((link) => {
+            const route = link.getAttribute("data-route");
+            const href = routeMap[route];
+            if (href) {
+              link.setAttribute("href", href);
+            }
+          });
+
+          const normalizePath = (path) =>
+            path.replace(/index\.html$/, "").replace(/\/+$/, "/");
+          const currentPath = normalizePath(window.location.pathname);
+
+          header.querySelectorAll("a[href]").forEach((link) => {
+            const linkPath = normalizePath(
+              new URL(link.getAttribute("href"), window.location.origin).pathname
+            );
+            if (linkPath === currentPath) {
+              link.classList.add("active");
+            }
+          });
         });
     </script>
-    <script src="work-gallery.js"></script>
+    <script src="./work-gallery.js"></script>
   </body>
 </html>
 

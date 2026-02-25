@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About - Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="work.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./about.css" />
   </head>
   <body class="work-page">
     <header id="site-header"></header>
@@ -189,7 +189,7 @@ At the core of dashboard and tool development is the design of systems that stru
     </footer>
 
     <script>
-      fetch("header.html")
+      fetch("../header.html")
         .then((response) => response.text())
         .then((html) => {
           const header = document.getElementById("site-header");
@@ -198,11 +198,48 @@ At the core of dashboard and tool development is the design of systems that stru
           }
           header.innerHTML = html;
 
-          const path = window.location.pathname.split("/").pop() || "index.html";
-          const activeLink = header.querySelector(`a[href="${path}"]`);
-          if (activeLink) {
-            activeLink.classList.add("active");
+          const pathSegments = window.location.pathname.split("/").filter(Boolean);
+          const portfolioIndex = pathSegments.indexOf("portfolio");
+          const routeSegments =
+            portfolioIndex >= 0
+              ? pathSegments.slice(portfolioIndex + 1)
+              : pathSegments.slice();
+
+          if (
+            routeSegments.length > 0 &&
+            routeSegments[routeSegments.length - 1].includes(".")
+          ) {
+            routeSegments.pop();
           }
+
+          const depth = routeSegments.length;
+          const prefix = depth === 0 ? "./" : "../".repeat(depth);
+          const routeMap = {
+            home: `${prefix}`,
+            work: `${prefix}work/`,
+            about: `${prefix}about/`,
+          };
+
+          header.querySelectorAll("[data-route]").forEach((link) => {
+            const route = link.getAttribute("data-route");
+            const href = routeMap[route];
+            if (href) {
+              link.setAttribute("href", href);
+            }
+          });
+
+          const normalizePath = (path) =>
+            path.replace(/index\.html$/, "").replace(/\/+$/, "/");
+          const currentPath = normalizePath(window.location.pathname);
+
+          header.querySelectorAll("a[href]").forEach((link) => {
+            const linkPath = normalizePath(
+              new URL(link.getAttribute("href"), window.location.origin).pathname
+            );
+            if (linkPath === currentPath) {
+              link.classList.add("active");
+            }
+          });
 
           const indicatorLinks = Array.from(
             document.querySelectorAll('.indicator-nav a[href^="#"]')
@@ -294,7 +331,7 @@ At the core of dashboard and tool development is the design of systems that stru
           });
         });
     </script>
-    <script src="work-cursor.js"></script>
+    <script src="./about-cursor.js"></script>
   </body>
 </html>
 

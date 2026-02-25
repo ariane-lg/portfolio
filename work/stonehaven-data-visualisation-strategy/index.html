@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Stonehaven Data Visualisation Strategy - Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="project-6.css" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="./project-6.css" />
   </head>
   <body class="project-page project-6-page">
     <header id="site-header"></header>
@@ -13,7 +13,7 @@
     <main>
       <img
         class="lede-img"
-        src="projects/datavisstrategy/hero1.png"
+        src="../../projects/datavisstrategy/hero1.png"
         alt="Stonehaven Data Visualisation Strategy hero image"
       />
       <hgroup>
@@ -49,7 +49,7 @@
 
         <figure class="triple tall">
           <img
-            src="projects/datavisstrategy/AStock2.png"
+            src="../../projects/datavisstrategy/AStock2.png"
             alt="Abstract stock illustration"
           />
           <figcaption></figcaption>
@@ -75,7 +75,7 @@ Alongside delivery, organisation-wide guidelines for data visualisation and
 
         <figure>
           <img
-            src="projects/datavisstrategy/design.png"
+            src="../../projects/datavisstrategy/design.png"
             alt="Design illustration"
           />
           <figcaption></figcaption>
@@ -93,7 +93,7 @@ Alongside delivery, organisation-wide guidelines for data visualisation and
     </main>
 
     <script>
-      fetch("header.html")
+      fetch("../../header.html")
         .then((response) => response.text())
         .then((html) => {
           const header = document.getElementById("site-header");
@@ -102,7 +102,37 @@ Alongside delivery, organisation-wide guidelines for data visualisation and
           }
           header.innerHTML = html;
 
-          const activeLink = header.querySelector('a[href="work.html"]');
+          const pathSegments = window.location.pathname.split("/").filter(Boolean);
+          const portfolioIndex = pathSegments.indexOf("portfolio");
+          const routeSegments =
+            portfolioIndex >= 0
+              ? pathSegments.slice(portfolioIndex + 1)
+              : pathSegments.slice();
+
+          if (
+            routeSegments.length > 0 &&
+            routeSegments[routeSegments.length - 1].includes(".")
+          ) {
+            routeSegments.pop();
+          }
+
+          const depth = routeSegments.length;
+          const prefix = depth === 0 ? "./" : "../".repeat(depth);
+          const routeMap = {
+            home: `${prefix}`,
+            work: `${prefix}work/`,
+            about: `${prefix}about/`,
+          };
+
+          header.querySelectorAll("[data-route]").forEach((link) => {
+            const route = link.getAttribute("data-route");
+            const href = routeMap[route];
+            if (href) {
+              link.setAttribute("href", href);
+            }
+          });
+
+          const activeLink = header.querySelector('[data-route="work"]');
           if (activeLink) {
             activeLink.classList.add("active");
           }
